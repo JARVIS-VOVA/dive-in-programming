@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1 id="heading">Hello world!</h1>
+
+  <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+  <script>
+    // var doHomeworkAlarm = function () {
+    //   alert("Hey! You need to do your homework!");
+    // }
+
+    // var timeoutId = setTimeout(doHomeworkAlarm, 1000)
+
+    // console.log(timeoutId)
+
+    // clearTimeout(timeoutId)
+
+    // 2 ### ### ###
+
+    // var counter = 1
+
+    // var printMessage = () => {
+    //   console.log("You have been staring at your console for " + counter + " seconds")
+    //   counter++
+    // }
+
+    // var intervalId = setInterval(printMessage, 1000);
+
+    // console.log('intervalId', intervalId)
+
+    // clearInterval(intervalId)
+
+    // 3 ### ### ###
+
+    var leftOffset = 0
+    var moveHeading = function () {
+
+    $("#heading").offset({ left: leftOffset })
+      leftOffset++
+
+      if (leftOffset > 50) {
+        leftOffset = 0
+      }
+    }
+
+    setInterval(moveHeading, 30)
+  </script>
+</body>
+</html>
