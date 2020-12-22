@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cars</title>
+</head>
+<body>
+  <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+  <script>
+    var Car = function (x, y) {
+      this.x = x;
+      this.y = y;
+    }
+
+    // var drawCar = function (car) {
+    //   var carHtml = '<img width="100" src="https://us.123rf.com/450wm/natchapohn/natchapohn1805/natchapohn180500038/101580956-stock-vector-convertible-transportation-cartoon-character-side-view-isolated-on-white-background-vector-illustrat.jpg?ver=6">';
+
+    //   var carElement = $(carHtml);
+
+    //   carElement.css({
+    //     position: "absolute",
+    //     left: car.x,
+    //     top: car.y,
+    //   })
+
+    //   $("body").append(carElement);
+    // }
+
+    // drawCar(tesla)
+    // drawCar(nissan)
+
+    Car.prototype.draw = function() {
+      var carHtml = '<img width="100" src="https://us.123rf.com/450wm/natchapohn/natchapohn1805/natchapohn180500038/101580956-stock-vector-convertible-transportation-cartoon-character-side-view-isolated-on-white-background-vector-illustrat.jpg?ver=6">';
+
+      this.carElement = $(carHtml)
+
+      this.carElement.css({
+        position: "absolute",
+        left: this.x,
+        top: this.y
+      })
+
+      $("body").append(this.carElement);
+    }
+
+    var tesla = new Car(10, 20);
+    var nissan = new Car(100, 200);
+
+    console.log(tesla.draw())
+    console.log(nissan.draw())
+
+    Car.prototype.moveRight = function () {
+      this.x += 5;
+
+      this.carElement.css({
+        left: this.x,
+        top: this.y
+      })
+    }
+
+    Car.prototype.moveLeft = function () {
+      this.x -= 5;
+
+      this.carElement.css({
+        left: this.x,
+        top: this.y
+      });
+    };
+
+    Car.prototype.moveUp = function () {
+      this.y -= 5;
+
+      this.carElement.css({
+        left: this.x,
+        top: this.y
+      });
+    };
+
+    Car.prototype.moveDown = function () {
+      this.y += 5;
+
+      this.carElement.css({
+        left: this.x,
+        top: this.y
+      });
+    };
+
+    console.log(tesla.moveRight())
+    console.log(tesla.moveUp())
+    console.log(tesla.moveLeft())
+    console.log(tesla.moveDown())
+  </script>
+</body>
+</html>
