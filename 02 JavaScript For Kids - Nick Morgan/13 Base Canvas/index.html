@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas</title>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="400"></canvas>
+  <canvas id="canvas2" width="500" height="400"></canvas>
+
+  <script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    // ctx.fillRect(0, 0, 10, 10);
+
+    for (var i = 0; i < 8; i++) {
+      ctx.fillRect(i * 20, i * 20, 20, 20);
+    }
+
+    ctx.fillStyle = "Red";
+    ctx.fillRect(200, 0, 100, 100);
+
+    ctx.strokeRect(350, 0, 100, 20);
+
+    ctx.strokeStyle = "DeepPink";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(350, 50, 100, 20);
+
+    // x
+    ctx.strokeStyle = "Turquoise";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(10, 200)
+    ctx.lineTo(50, 250)
+    ctx.moveTo(10, 250)
+    ctx.lineTo(50, 200)
+    ctx.stroke()
+
+    // House
+    ctx.fillStyle = "SkyBlue";
+    ctx.beginPath();
+    ctx.moveTo(100, 300);
+    ctx.lineTo(100, 260);
+    ctx.lineTo(130, 230);
+    ctx.lineTo(160, 260);
+    ctx.lineTo(160, 300);
+    ctx.lineTo(100, 300);
+    ctx.fill();
+
+    var canvas2 = document.getElementById("canvas2");
+    var ctx2 = canvas2.getContext("2d");
+
+    // Circle
+    // Quarter
+    ctx2.lineWidth = 2;
+    ctx2.strokeStyle = "Green";
+    ctx2.beginPath();
+    ctx2.arc(50, 50, 20, 0, Math.PI / 2, false);
+    ctx2.stroke();
+
+    // Half
+    ctx2.beginPath();
+    ctx2.arc(100, 50, 20, 0, Math.PI, false);
+    ctx2.stroke();
+
+    // Full
+    ctx2.beginPath();
+    ctx2.arc(150, 50, 20, 0, Math.PI * 2, false);
+    ctx2.stroke();
+
+    var circle = function (x, y, radius) {
+      ctx2.beginPath();
+      ctx2.arc(x, y, radius, 0, Math.PI * 2, false);
+      ctx2.stroke();
+    };
+
+    ctx2.lineWidth = 4;
+    ctx2.strokeStyle = "Red";
+    circle(250, 100, 10);
+    ctx2.strokeStyle = "Orange";
+    circle(250, 100, 20);
+    ctx2.strokeStyle = "Yellow";
+    circle(250, 100, 30);
+    ctx2.strokeStyle = "Green";
+    circle(250, 100, 40);
+    ctx2.strokeStyle = "Blue";
+    circle(250, 100, 50);
+    ctx2.strokeStyle = "Purple";
+    circle(250, 100, 60);
+  </script>
+</body>
+</html>
