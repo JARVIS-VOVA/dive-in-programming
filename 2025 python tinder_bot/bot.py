@@ -19,6 +19,40 @@ async def start(update, context):
         "gpt": "Задати питання ChatGPT \uD83E\uDDE0",
     })
 
+async def profile(update, context):
+    dialog.mode = "profile"
+    message = load_message("profile")
+    await send_photo(update, context, "profile")
+    await send_text(update, context, message)
+    dialog.user.clear()
+    dialog.counter = 0
+    await send_text(update, context, "Скільки вам років?")
+
+async def profile_dialog(update, context):
+    text = update.message.text
+    dialog.counter += 1
+
+    if dialog.counter == 1:
+        dialog.user["age"] = text
+        await send_text(update, context, "Ким ви працюєте?")
+    if dialog.counter == 2:
+        dialog.user["occupation"] = text
+        await send_text(update, context, "У вас є хобі?")
+    if dialog.counter == 3:
+        dialog.user["hobby"] = text
+        await send_text(update, context, "Що вам не подобається в людях?")
+    if dialog.counter == 4:
+        dialog.user["annoys"] = text
+        await send_text(update, context, "Мета знайомства?")
+    if dialog.counter == 5:
+        dialog.user["goals"] = text
+        prompt = load_prompt("profile")
+        user_info = dialog_user_info_to_str(dialog.user)
+
+        my_message = await send_text(update, context, "ChatGPT 🧠 генерує ваш профілью. Зачекайте кілька секунд...")
+        answer = await chatgpt.send_question(prompt, user_info)
+        await my_message.edit_text(answer)
+
 async def hello(update, context):
     if dialog.mode == "gpt":
         await gpt_dialog(update, context)
@@ -26,6 +60,8 @@ async def hello(update, context):
         await date_dialog(update, context)
     elif dialog.mode == "message":
         await message_dialog(update, context)
+    elif dialog.mode == "profile":
+        await profile_dialog(update, context)
 
 async def gpt(update, context):
     dialog.mode = "gpt"
@@ -102,6 +138,8 @@ async def message_button(update, context):
 dialog = Dialog()
 dialog.mode = None
 dialog.list = []
+dialog.user = {}
+dialog.counter = 0
 
 chatgpt = ChatGptService(token=OPEN_AI_TOKEN)
 
@@ -110,6 +148,7 @@ app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("gpt", gpt))
 app.add_handler(CommandHandler("date", date))
 app.add_handler(CommandHandler("message", message))
+app.add_handler(CommandHandler("profile", profile))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, hello))
 # app.add_handler(CallbackQueryHandler(buttons_handler))
 app.add_handler(CallbackQueryHandler(date_button, pattern="^date_.*"))
