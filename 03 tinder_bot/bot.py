@@ -3,8 +3,8 @@ from telegram.ext import ApplicationBuilder, MessageHandler, filters, CallbackQu
 from gpt import *
 from util import *
 
-TELEGRAM_BOT_TOKEN = "8034267?49:AAEw_HNWPHE6BoU_Jj2?Wx8QGnk0Geq-vMY"
-OPEN_AI_TOKEN = "gpt:AwXimzQXBV8upnlD2Fs0exPWVNTK9gmJGa_-erhzfPL1q5ldKc7zlb9PU53QlMYgrXBnjxK1uVJFkblB?TVSZ57z?Zm705v8y2sd9IG54evj_wDJ-zeNy_W7xT6lcYEGbp9qD9IbKvgZ5Ks22k_pKNEe74Sd"
+TELEGRAM_BOT_TOKEN = "8034267349:AAEw_HNWPHE6BoU_Jj23Wx8QGnk0Geq-vMY"
+OPEN_AI_TOKEN = "gpt:AwXimzQXBV8upnlD2Fs0exPWVNTK9gmJGa_-erhzfPL1q5ldKc7zlb9PU53QlMYgrXBnjxK1uVJFkblB3TVSZ57z3Zm705v8y2sd9IG54evj_wDJ-zeNy_W7xT6lcYEGbp9qD9IbKvgZ5Ks22k_pKNEe74Sd"
 
 async def start(update, context):
     message = load_message("main")
