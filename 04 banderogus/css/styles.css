@@ -1,7 +1,6 @@
 body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
-
 }
 
 .main-page {
@@ -73,4 +72,68 @@ body {
 
 .logo {
   margin-top: 32px;
+}
+
+.facts {
+  padding-top: 48px;
+  padding-bottom: 100px;
+  text-align: center;
+}
+
+.facts-trezub {
+  margin-bottom: 24px;
+}
+
+.facts-title {
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 150%;
+  color: #1b1d1f;
+  margin-top: 32px;
+  margin-bottom: 0;
+}
+
+.facts-title-description {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: #1b1d1f;
+  width: 772px;
+  margin: auto;
+  margin-top: 32px;
+}
+
+.facts-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  max-width: 1170px;
+  margin: auto;
+  margin-top: 32px;
+}
+
+.facts-item {
+  max-width: 374px;
+}
+
+.facts-item-title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  text-align: center;
+  color: #1b1d1f;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.facts-item-description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: #1b1d1f;
+  margin-bottom: 0;
 }
