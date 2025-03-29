@@ -1,5 +1,6 @@
 import pygame
 import random
+import os
 from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
 
 HEIGHT = 800
@@ -8,6 +9,8 @@ COLOR_BLACK = (0, 0, 0)
 FPS_SPEED = 500
 ENEMY_INITIAL_PADDING = 50
 BONUS_INITIAL_PADDING = 50
+IMAGE_PATH = "img/player"
+PLAYER_IMAGES = os.listdir(IMAGE_PATH)
 
 pygame.init()
 FPS = pygame.time.Clock()
@@ -19,7 +22,7 @@ background_X1 = 0
 background_X2 = background.get_width()
 background_move = 3
 
-player = pygame.image.load('img/player.png').convert_alpha()
+player = pygame.image.load('img/player/1-1.png').convert_alpha()
 player_size = (player.get_width(), player.get_height())
 player_rect = pygame.Rect(0 , HEIGHT / 2, *player_size)
 player_speed = [1, 1]
@@ -55,6 +58,10 @@ CREATE_BONUS = pygame.USEREVENT + 2
 pygame.time.set_timer(CREATE_BONUS, 1500)
 bonuses = []
 
+CHANGE_IMAGE = pygame.USEREVENT + 3
+pygame.time.set_timer(CHANGE_IMAGE, 200)
+image_index = 0
+
 score = 0
 
 while playing:
@@ -67,6 +74,11 @@ while playing:
             enemies.append(create_enemy())
         if event.type == CREATE_BONUS:
             bonuses.append(create_bonus())
+        if event.type == CHANGE_IMAGE:
+            player = pygame.image.load(os.path.join(IMAGE_PATH, PLAYER_IMAGES[image_index]))
+            image_index += 1
+            if image_index >= len(PLAYER_IMAGES):
+                image_index = 0
 
     background_X1 -= background_move
     background_X2 -= background_move
