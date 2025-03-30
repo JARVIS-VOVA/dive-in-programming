@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preload" href="img/gus-anim.gif" as="image">
 </head>
 <body>
   <section class="main-page">
@@ -21,7 +22,7 @@
         <p class="main-page-hello-text">Доброго вечора, ми з України</p>
         <h1 class="main-page-title">Бандерогусь</h1>
         <p class="main-page-description">Спеціальний бойовий гусак із біолабораторій України. Пишаюся своїми подвигами, бороню Батьківщину та підтримую позитивний дух народу. Слава Україні!</p>
-        <button class="main-page-button">Запустити гуся</button>
+        <button class="main-page-button" id="go-to-form-btn">Запустити гуся</button>
       </div>
       <img src="img/gus.svg" alt="Banderogus">
     </div>
@@ -60,5 +61,29 @@
       </div>
     </div>
   </section>
+
+  <section class="form-container">
+    <form action="#" class="form" id="form">
+      <img src="img/trezub.svg" alt="Trezub" />
+      <h4 class="form-title">Поділися, будь ласка, поштою</h4>
+      <p class="form-description">та запиши гуся до бандерозагону</p>
+
+      <div class="form-field">
+        <label for="user-name" class="form-field-label">Імʼя</label>
+        <input type="text" id="user-name" class="form-input" />
+      </div>
+
+      <div class="form-field">
+        <label for="user-email" class="form-field-label">Email</label>
+        <input type="email" id="user-email" class="form-input" />
+      </div>
+
+      <button class="form-button" id="launch-btn" type="submit">
+        Запустити гуся
+      </button>
+    </form>
+  </section>
+
+  <script src="js/form.js"></script>
 </body>
 </html>
