@@ -1,3 +1,13 @@
+h1, h2, h3, h4, h5, h6, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+ol, ul, li {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
@@ -8,6 +18,8 @@ body {
 .wrapper {
   display: flex;
   flex-direction: row-reverse;
+  width: 1200px;
+  margin: auto;
 }
 
 .main-content {
@@ -71,4 +83,135 @@ body {
   font-size: 14px;
   line-height: 171%;
   color: #161d2a;
+}
+
+.my-profession {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 121%;
+  color: #000;
+}
+
+.my-name {
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 122%;
+  color: #000;
+  margin-top: 8px;
+}
+
+.my-description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 171%;
+  color: #595959;
+  margin-top: 12px;
+}
+
+.big-title {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 123%;
+  color: #000;
+}
+
+.projects {
+  margin-top: 40px;
+}
+
+.projects-list {
+  padding-left: 16px;
+}
+
+.projects-item {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 171%;
+  color: #000;
+}
+
+.projects-link {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 171%;
+  text-decoration: underline;
+  color: #005fff;
+}
+
+.projects-technologies {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 171%;
+  color: #595959;
+}
+
+.work-experience {
+  margin-top: 40px;
+}
+
+.work-experience-company {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  color: #000;
+  margin-top: 12px;
+}
+
+.work-experience-company-name {
+  color: #6d9bf5;
+}
+
+.work-experience-company-period {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 125%;
+  color: #a8a8a8;
+  margin-top: 12px;
+}
+
+.work-experience-company-period-separator {
+  color: #000
+}
+
+.work-experience-list {
+  margin-top: 8px;
+  padding-left: 16px;
+}
+
+.work-experience-list-item {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 171%;
+  color: #595959;
+}
+
+.education-wrapper {
+  margin-top: 40px;
+}
+
+.education-place {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #6d9bf5;
+  margin-top: 8px;
+}
+
+.education-type {
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  margin-top: 8px;
+}
+
+.education-period {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #a8a8a8;
+  margin-top: 8px;
+}
+
+.education-period-separator {
+  color: #000;
 }
