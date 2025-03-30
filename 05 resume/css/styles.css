@@ -14,6 +14,61 @@ body {
   padding: 80px 40px 80px 80px;
 }
 
-.project-item {
+.sidebar {
+  background: #E0EBFE;
+  box-sizing: border-box;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 370px;
+}
 
+.sidebar-content {
+  padding: 40px 40px 0 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.contacts-title {
+  font-weight: 700;
+  font-size: 22px;
+  color: #161d2a;
+  margin: 0;
+}
+
+.contacts-details {
+  margin-top: 8px;
+}
+
+.contacts-type {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 171%;
+  color: #161d2a;
+  margin-right: 8px;
+}
+
+.contacts-link {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration: underline;
+  color: #2979ff;
+}
+
+.contacts-item {
+  margin: 0;
+}
+
+.skills-list {
+  padding-left: 16px;
+  margin: 0;
+}
+
+.skills-list-item {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 171%;
+  color: #161d2a;
 }
