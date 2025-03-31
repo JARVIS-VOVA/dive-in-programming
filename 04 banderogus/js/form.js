@@ -30,7 +30,6 @@ function showGooseAnim() {
 
   gooseEl.setAttribute('src', './img/gus-anim.gif');
 
-
   setTimeout(() => {
     gooseEl.removeAttribute('src');
   }, 4000)
@@ -42,17 +41,13 @@ form.addEventListener('submit', e => {
   e.preventDefault();
   const formData = new FormData(form);
 
-  if (userEmailField?.value?.length > 30) {
-    return;
-  }
-
-  console.log('Імʼя користувача: ', userEmailField.value);
-  console.log('Email користувача: ', userNameField.value);
-
   launchBtn.setAttribute('disabled', true);
   launchBtn.style.opacity = '0.7';
 
   showGooseAnim();
+
+  launchBtn.removeAttribute('disabled');
+  clearFormFields();
 
   setTimeout(() => {
     launchBtn.style.opacity = '1';
