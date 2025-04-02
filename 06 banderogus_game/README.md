@@ -1,4 +1,4 @@
-# Banderogus
+# Banderogus Game
 
 ## Про курс
 Python марафон "Banderogus game" від GoIT
