@@ -4,10 +4,10 @@
 ### Coding Journey Timeline
 
 #### 2025
-- Tinder Bot - [tinder_bot](https://github.com/JARVIS-VOVA/dive-in-programming/tree/master/03%20tinder_bot) - [Python]
+- Tinder Bot - [tinder-bot](https://github.com/JARVIS-VOVA/dive-into-programming/tree/master/03%20tinder-bot) - [Python]
 - Banderogus - [banderogus](https://github.com/JARVIS-VOVA/dive-in-programming/tree/master/04%20banderogus) - [HTML/CSS]
 - Resume - [Resume](https://github.com/JARVIS-VOVA/dive-in-programming/tree/master/05%20resume) - [HTML/CSS]
-- Banderogus Game - [banderogus_game](https://github.com/JARVIS-VOVA/dive-in-programming/tree/master/06%20banderogus_game) - [Python]
+- Banderogus Game - [banderogus-game](https://github.com/JARVIS-VOVA/dive-into-programming/tree/master/06%20banderogus-game) - [Python]
 
 #### 2024
 - Song - [song](https://github.com/JARVIS-VOVA/song) - [Node, Firebase]
