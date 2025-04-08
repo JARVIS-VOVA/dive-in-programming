@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TinderBoltApp extends MultiSessionTelegramBot {
     public static final String TELEGRAM_BOT_TOKEN = "tinder_bot"; //TODO: додай токен бота в лапках
@@ -18,6 +19,7 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
 
     public DialogMode mode = DialogMode.MAIN;
     public ChatGPTService gptService = new ChatGPTService(OPEN_AI_TOKEN);
+    private List<String> chat;
 
     public TinderBoltApp() {
         super(TELEGRAM_BOT_NAME, TELEGRAM_BOT_TOKEN);
@@ -53,8 +55,60 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
 
         if (mode == DialogMode.GPT) {
             String gpt_prompt = loadPrompt("gpt");
+            Message loadingMessage = sendTextMessage("Почекай...");
             String answer = gptService.sendMessage(gpt_prompt, message);
-            sendTextMessage(answer);
+            updateTextMessage(loadingMessage, answer);
+            return;
+        }
+
+        if (message.equals("/date")) {
+            mode = DialogMode.DATE;
+            sendPhotoMessage("date");
+            String dateMessage = loadMessage("date");
+            sendTextButtonsMessage(dateMessage,
+                    "Аріана Гранде", "date_grande",
+                    "Марго Роббі", "date_robbie",
+                    "Зендея", "date_zendaya",
+                    "Райан Гослінг", "date_gosling",
+                    "Том Харді", "date_hardy");
+            return;
+        }
+
+        if (mode == DialogMode.DATE) {
+            String query = getCallbackQueryButtonKey();
+            if (query.startsWith("date_")) {
+                sendPhotoMessage(query);
+                String prompt = loadPrompt(query);
+                gptService.setPrompt(prompt);
+                return;
+            }
+            Message loadingMessage = sendTextMessage("Почекай...");
+            String answer = gptService.addMessage(message);
+            updateTextMessage(loadingMessage, answer);
+            return;
+        }
+
+        if (message.equals("/message")) {
+            mode = DialogMode.MESSAGE;
+            sendPhotoMessage("message");
+            String gptMessageHelper = loadMessage("message");
+            sendTextButtonsMessage (gptMessageHelper,
+                    "Наступне повідомлення", "message_next",
+                    "Запросити на побачення", "message_date");
+            chat = new ArrayList<>();
+            return;
+        }
+
+        if (mode == DialogMode.MESSAGE) {
+            String query = getCallbackQueryButtonKey();
+            if (query.startsWith("message_")) {
+                String prompt = loadPrompt(query);
+                String history = String. join("/n/n", chat);
+                Message loadingMessage = sendTextMessage("Почекай...");
+                String answer = gptService.sendMessage(prompt, history);
+                updateTextMessage(loadingMessage, answer);
+            }
+            chat.add(message);
             return;
         }
     }
