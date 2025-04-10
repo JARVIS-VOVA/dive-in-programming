@@ -20,6 +20,9 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
     public DialogMode mode = DialogMode.MAIN;
     public ChatGPTService gptService = new ChatGPTService(OPEN_AI_TOKEN);
     private List<String> chat;
+    private UserInfo myInfo;
+    private UserInfo personInfo;
+    private int questionNumber;
 
     public TinderBoltApp() {
         super(TELEGRAM_BOT_NAME, TELEGRAM_BOT_TOKEN);
@@ -75,6 +78,26 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
                 chat = new ArrayList<>();
                 return;
             }
+            case "/profile" -> {
+                mode = DialogMode.PROFILE;
+                sendPhotoMessage("profile");
+                String profileMessage = loadMessage("profile");
+                sendTextButtonsMessage (profileMessage);
+                myInfo = new UserInfo();
+                questionNumber = 1;
+                sendTextMessage("Введіть імʼя?");
+                return;
+            }
+            case "/opener" -> {
+                mode = DialogMode.OPENER;
+                sendPhotoMessage("opener");
+                String openerMessage = loadMessage("opener");
+                sendTextButtonsMessage (openerMessage);
+                personInfo = new UserInfo();
+                questionNumber = 1;
+                sendTextMessage("Введіть імʼя?");
+                return;
+            }
         }
 
         switch (mode) {
@@ -108,6 +131,61 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
                     updateTextMessage(loadingMessage, answer);
                 }
                 chat.add(message);
+                return;
+            }
+            case PROFILE -> {
+                if (questionNumber <= 6) {
+                    askQuestion(message, myInfo, "profile");
+                    return;
+                }
+            }
+            case OPENER -> {
+                if (questionNumber <= 6) {
+                    askQuestion(message, personInfo, "opener");
+                    return;
+                }
+            }
+        }
+    }
+
+    private void askQuestion(String message, UserInfo user, String profileName) {
+        switch (questionNumber) {
+            case 1 -> {
+                user.name = message;
+                questionNumber = 2;
+                sendTextMessage("Введіть вік?");
+                return;
+            }
+            case 2 -> {
+                user.age = message;
+                questionNumber = 3;
+                sendTextMessage("Введіть місто?");
+                return;
+            }
+            case 3 -> {
+                user.city = message;
+                questionNumber = 4;
+                sendTextMessage("Введіть професію?");
+                return;
+            }
+            case 4 -> {
+                user.city = message;
+                questionNumber = 5;
+                sendTextMessage("Введіть хоббі?");
+                return;
+            }
+            case 5 -> {
+                user.city = message;
+                questionNumber = 6;
+                sendTextMessage("Введіть цілі для знайомства?");
+                return;
+            }
+            case 6 -> {
+                user.goals = message;
+                String prompt = loadPrompt(profileName);
+                Message loadingMessage = sendTextMessage("Почекай...");
+                String answer = gptService.sendMessage(prompt, user.toString());
+                updateTextMessage(loadingMessage, answer);
                 return;
             }
         }
