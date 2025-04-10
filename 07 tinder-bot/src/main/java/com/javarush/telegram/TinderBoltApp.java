@@ -28,88 +28,88 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
     @Override
     public void onUpdateEventReceived(Update update) {
         String message = getMessageText();
-        if (message.equals("/start")) {
-            mode = DialogMode.MAIN;
-            showMainMenu(
-                "головне меню бота", "/start",
-                "генерація Tinder-профілю 😎", "/profile",
-                "повідомлення для знайомства 🥰", "/opener",
-                "листування від вашого імені 😈", "/message",
-                "листування із зірками 🔥", "/date",
-                "поставити запитання чату GPT 🧠", "/gpt"
-            );
 
-            String menu = loadMessage("main");
-            sendTextMessage(menu);
-            sendPhotoMessage("main");
-            return;
-        }
+        switch (message) {
+            case "/start" -> {
+                mode = DialogMode.MAIN;
+                showMainMenu(
+                        "головне меню бота", "/start",
+                        "генерація Tinder-профілю 😎", "/profile",
+                        "повідомлення для знайомства 🥰", "/opener",
+                        "листування від вашого імені 😈", "/message",
+                        "листування із зірками 🔥", "/date",
+                        "поставити запитання чату GPT 🧠", "/gpt"
+                );
 
-        if (message.equals("/gpt")) {
-            mode = DialogMode.GPT;
-            String gptMessage = loadMessage("gpt");
-            sendTextMessage(gptMessage);
-            sendPhotoMessage("gpt");
-            return;
-        }
-
-        if (mode == DialogMode.GPT) {
-            String gpt_prompt = loadPrompt("gpt");
-            Message loadingMessage = sendTextMessage("Почекай...");
-            String answer = gptService.sendMessage(gpt_prompt, message);
-            updateTextMessage(loadingMessage, answer);
-            return;
-        }
-
-        if (message.equals("/date")) {
-            mode = DialogMode.DATE;
-            sendPhotoMessage("date");
-            String dateMessage = loadMessage("date");
-            sendTextButtonsMessage(dateMessage,
-                    "Аріана Гранде", "date_grande",
-                    "Марго Роббі", "date_robbie",
-                    "Зендея", "date_zendaya",
-                    "Райан Гослінг", "date_gosling",
-                    "Том Харді", "date_hardy");
-            return;
-        }
-
-        if (mode == DialogMode.DATE) {
-            String query = getCallbackQueryButtonKey();
-            if (query.startsWith("date_")) {
-                sendPhotoMessage(query);
-                String prompt = loadPrompt(query);
-                gptService.setPrompt(prompt);
+                String menu = loadMessage("main");
+                sendTextMessage(menu);
+                sendPhotoMessage("main");
                 return;
             }
-            Message loadingMessage = sendTextMessage("Почекай...");
-            String answer = gptService.addMessage(message);
-            updateTextMessage(loadingMessage, answer);
-            return;
-        }
-
-        if (message.equals("/message")) {
-            mode = DialogMode.MESSAGE;
-            sendPhotoMessage("message");
-            String gptMessageHelper = loadMessage("message");
-            sendTextButtonsMessage (gptMessageHelper,
-                    "Наступне повідомлення", "message_next",
-                    "Запросити на побачення", "message_date");
-            chat = new ArrayList<>();
-            return;
-        }
-
-        if (mode == DialogMode.MESSAGE) {
-            String query = getCallbackQueryButtonKey();
-            if (query.startsWith("message_")) {
-                String prompt = loadPrompt(query);
-                String history = String. join("/n/n", chat);
-                Message loadingMessage = sendTextMessage("Почекай...");
-                String answer = gptService.sendMessage(prompt, history);
-                updateTextMessage(loadingMessage, answer);
+            case "/gpt" -> {
+                mode = DialogMode.GPT;
+                String gptMessage = loadMessage("gpt");
+                sendTextMessage(gptMessage);
+                sendPhotoMessage("gpt");
+                return;
             }
-            chat.add(message);
-            return;
+            case "/date" -> {
+                mode = DialogMode.DATE;
+                sendPhotoMessage("date");
+                String dateMessage = loadMessage("date");
+                sendTextButtonsMessage(dateMessage,
+                        "Аріана Гранде", "date_grande",
+                        "Марго Роббі", "date_robbie",
+                        "Зендея", "date_zendaya",
+                        "Райан Гослінг", "date_gosling",
+                        "Том Харді", "date_hardy");
+                return;
+            }
+            case "/message" -> {
+                mode = DialogMode.MESSAGE;
+                sendPhotoMessage("message");
+                String gptMessageHelper = loadMessage("message");
+                sendTextButtonsMessage (gptMessageHelper,
+                        "Наступне повідомлення", "message_next",
+                        "Запросити на побачення", "message_date");
+                chat = new ArrayList<>();
+                return;
+            }
+        }
+
+        switch (mode) {
+            case GPT -> {
+                String gpt_prompt = loadPrompt("gpt");
+                Message loadingMessage = sendTextMessage("Почекай...");
+                String answer = gptService.sendMessage(gpt_prompt, message);
+                updateTextMessage(loadingMessage, answer);
+                return;
+            }
+            case DATE -> {
+                String query = getCallbackQueryButtonKey();
+                if (query.startsWith("date_")) {
+                    sendPhotoMessage(query);
+                    String prompt = loadPrompt(query);
+                    gptService.setPrompt(prompt);
+                    return;
+                }
+                Message loadingMessage = sendTextMessage("Почекай...");
+                String answer = gptService.addMessage(message);
+                updateTextMessage(loadingMessage, answer);
+                return;
+            }
+            case MESSAGE -> {
+                String query = getCallbackQueryButtonKey();
+                if (query.startsWith("message_")) {
+                    String prompt = loadPrompt(query);
+                    String history = String. join("/n/n", chat);
+                    Message loadingMessage = sendTextMessage("Почекай...");
+                    String answer = gptService.sendMessage(prompt, history);
+                    updateTextMessage(loadingMessage, answer);
+                }
+                chat.add(message);
+                return;
+            }
         }
     }
 
